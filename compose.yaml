@@ -1,0 +1,45 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+
+name: notes
+
+services:
+  backend:
+    build:
+      context: ./server
+    env_file: "./server/.env.docker"
+    restart: always
+    container_name: backend
+    environment:
+      - NODE_ENV=production
+    ports:  # Expose the port 5000 directly, it will be used to directly call the api - localhost:5000/api/route
+      - "5000:5000"
+    networks:
+      - notes-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./client
+    restart: always
+    environment:
+      NODE_ENV: production
+    container_name: frontend
+    ports: # Expose the port directly, it will be the notes app entry point
+      - "80:4173"
+    networks:
+      - notes-network
+
+networks:
+  notes-network:
+    driver: bridge

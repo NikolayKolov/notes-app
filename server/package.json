@@ -1,0 +1,35 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "type": "module",
+  "scripts": {
+    "start": "prisma generate && npx -p typescript tsc --noEmit && tsx app.ts",
+    "start:docker": "prisma generate && tsx app.ts",
+    "dev": "tsx watch app.ts",
+    "postinstall": "npx prisma generate"
+  },
+  "keywords": [],
+  "author": "Nikolay Kolov",
+  "license": "ISC",
+  "description": "Test backend for a notes data base",
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "node-cache": "^5.1.2",
+    "nodemailer": "^6.9.13",
+    "tsx": "^4.15.7",
+    "zod": "^3.23.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  }
+}

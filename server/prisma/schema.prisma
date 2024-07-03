@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id          Int         @id     @default(autoincrement())
+    email       String      @unique
+    firstName   String
+    lastName    String
+    // The password hash + salt from bcryptjs library,
+    // the salt is the first part of the string until '/' character, the hash is the second
+    passSaltHash    String
+    // The user must have a verified email address in order to successfully log in
+    isVerified  Boolean     @default(false)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    Note        Note[]
+    UserLoginIP UserLoginIP[]
+    VerificationEmail   EmailVerificationId[] 
+    @@index([email])
+}
+
+// Keep IPs used by user for login
+// If the user logs in from a different IP,
+// block login until the new IP is validated by clicking a link sent to the user email
+model UserLoginIP {
+    id          String      @id     @default(uuid())
+    // When deleting a user, delete automatically all related login IPs
+    owner       User        @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: NoAction )
+    ownerId     Int
+    ipAddress   String
+    isIPValid   Boolean     @default(false)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+}
+
+model Note {
+    id          Int         @id     @default(autoincrement())
+    type        NoteType
+    title       String
+    content     String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    // When deleting a user, delete automatically all related notes
+    owner       User        @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: NoAction )
+    ownerId     Int
+    listItems   NoteChecklistItems[]
+}
+
+model NoteChecklistItems {
+    // Use UUID instead of autoincrement because the list of items will be deleted and recreated
+    // on each edit. This is done to properly record user changes, with user keeping the last saved edit.
+    // Also, editing in Postgres is just delete and insert behind the scenes anyways.
+    // Otherwise on a note with list of changes the autoincrement would add ids that would end up looking inconsistent.
+    id          String      @id     @default(uuid())
+    text        String
+    order       Int
+    isDone      Boolean     @default(false)
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    // When deleting a note, delete automatically all related note list items
+    owner       Note        @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: NoAction )
+    ownerId     Int
+}
+
+// Email verification links for user
+model EmailVerificationId {
+    // The UUID will be sent to the link
+    id          String      @id        @default(uuid())
+    createdAt   DateTime    @default(now())
+    // User must click link in email within 24 hours to confirm registration
+    expiresAt   DateTime    @default(dbgenerated("NOW() + interval '24 hours'"))
+    owner       User        @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    ownerId     Int
+}
+
+enum NoteType {
+    TEXT
+    CHECKLIST
+}
