@@ -32,7 +32,8 @@ const NavigationLogoutMenu = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit">
+                color="inherit"
+                data-testid="logout-button">
                 <AccountCircle fontSize='inherit' />
             </IconButton>
             <Menu
@@ -53,9 +54,9 @@ const NavigationLogoutMenu = () => {
                     '&:hover': {
                         cursor: 'initial'
                     }
-                }]}>{auth?.user?.userName}</MenuItem>
+                }]} data-testid="user-name">{auth?.user?.userName}</MenuItem>
                 <Divider />
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout} data-testid="logout-link">Logout</MenuItem>
               </Menu>
         </>
     );

@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -37,5 +39,9 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "optionalDependencies": {
+    "cypress": "^13.13.0",
+    "cypress-vite": "^1.5.0"
   }
 }

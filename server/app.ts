@@ -44,6 +44,11 @@ app.listen(PORT, () => {
 // doesn't test TypeScript, use "start" script for that before going to production
 //      "dev": "nodemon app.ts",
 
+// Remove prisma generate, as it it already triggered by the postinstall hook
+//     "start:docker": "prisma generate && tsx app.ts",
+
 // prisma update schema and push
 //      make changes to schema
 //      create migration with command npx prisma migrate dev --name name-of-migration
+
+// Migrate on prod with command "npx prisma migrate deploy", in CI/CD pipeline

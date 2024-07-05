@@ -91,10 +91,10 @@ const NavigationLoginDialog = ({ open, onClose }: LoginDialogProps) => {
             onClose={handleClose}
             PaperProps={{
                 component: 'form',
-                onSubmit: handleSubmit,
-              }}>
+                onSubmit: handleSubmit
+            }}>
             <DialogTitle>Login or Register</DialogTitle>
-            <DialogContent>
+            <DialogContent data-testid="login-dialog">
                 <DialogContentText>
                     Login with your email and password.
                 </DialogContentText>
@@ -131,7 +131,7 @@ const NavigationLoginDialog = ({ open, onClose }: LoginDialogProps) => {
                 {
                     loginStatus === 'success' ?
                         null :
-                        <Button type="submit" disabled={loginStatus === 'loading'}>Login</Button>
+                        <Button type="submit" name="login" disabled={loginStatus === 'loading'}>Login</Button>
                 }
             </DialogActions>
         </Dialog>

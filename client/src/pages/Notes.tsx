@@ -32,7 +32,12 @@ const Notes = () => {
                     sm: 'initial'
                 }
             }}>
-                Please log in or <Link href='/register' onClick={handleNavigate}>register here</Link> to use the Notes app.
+                Please log in or <Link
+                    href='/register'
+                    onClick={handleNavigate}
+                    data-testid="registration-link">
+                    register here
+                </Link> to use the Notes app.
             </Typography>
         </Box>
     )

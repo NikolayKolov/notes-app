@@ -5,9 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 type NavigationLinkProps = {
     text: string,
     href: string
+    cypressTestId?: string
 }
 
-const NavigationLink = ({ text, href }: NavigationLinkProps) => {
+const NavigationLink = ({ text, href, cypressTestId }: NavigationLinkProps) => {
     const location = useLocation();
     let isActive = false;
     if (location.pathname === href) isActive = true;
@@ -31,7 +32,8 @@ const NavigationLink = ({ text, href }: NavigationLinkProps) => {
             sx={[
                 { '&.MuiLink-root:hover': { color: 'primary.light' }},
                 { mr: 2, fontWeight: isActive? "fontWeghtBold" : "fontWeightLight" }
-            ]}>
+            ]}
+            data-testid={cypressTestId || ''}>
             {text}
         </Link>
     )

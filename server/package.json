@@ -6,6 +6,7 @@
   "scripts": {
     "start": "prisma generate && npx -p typescript tsc --noEmit && tsx app.ts",
     "start:docker": "prisma generate && tsx app.ts",
+    "prisma:deploy": "npx prisma migrate deploy",
     "dev": "tsx watch app.ts",
     "postinstall": "npx prisma generate"
   },

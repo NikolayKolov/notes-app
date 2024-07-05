@@ -45,13 +45,13 @@ const Navigation = () => {
                     <Box sx={{ textTransform: 'uppercase' }}>
                         <NavigationLink text='notes' href='/' />
                         <AuthComponent>
-                            <NavigationLink text='new note' href='/create' />
+                            <NavigationLink text='new note' href='/create' cypressTestId="create-new-note" />
                         </AuthComponent>
                     </Box>
                     {
                         isUserLoggedIn ?
                             <NavigationLogoutMenu /> :
-                            <NavigationButton text='login' onClick={handleLogin} />
+                            <NavigationButton text='login' onClick={handleLogin} cypressTestId="login-link" />
                     }
                 </Toolbar>
             </AppBar>

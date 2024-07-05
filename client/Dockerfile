@@ -39,10 +39,11 @@ WORKDIR /usr/src/notes-frontend/
 # into this layer.
 # Don't use "--omit=dev", use dev dependencies for compiling and building TypeScript with "tsc && vite build"
 # The next stage just takes the build from /dist folder and uses that, so it won't matter for image size
+# Skip optional packages though, as they would include cypress, which is heavy and needed only for testing.
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
-    ["npm", "ci"]
+    ["npm", "ci", "--omit=optional"]
 
 # Copy the rest of the source files into the image.
 COPY . .

@@ -86,7 +86,8 @@ const RegistrationForm = () => {
                 },
                 display: "flex",
                 flexDirection: "column"
-            }}>
+            }}
+            data-testid="registration-form">
             <Box sx={{
                     width: 'inherit',
                     display: "grid",
