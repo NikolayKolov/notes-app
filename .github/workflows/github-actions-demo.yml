@@ -58,6 +58,6 @@ jobs:
           wait-on: 'http://127.0.0.1:5173'
           working-directory: ./client
           browser: chrome
-          config: test_user=${{secrets.TEST_USER}},test_user_password=${{secrets.TEST_USER}},test_user_name=${{secrets.USER_NAME}}
+          config: test_user=${{ secrets.TEST_USER }},test_user_password=${{ secrets.TEST_USER_PASSWORD }},test_user_name=${{ secrets.USER_NAME }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
