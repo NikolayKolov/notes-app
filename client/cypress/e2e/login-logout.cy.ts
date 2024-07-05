@@ -1,5 +1,5 @@
 describe('Login and logout', () => {
-  it('Login -> inspect create new note, logout -> see if create ne note is removed', () => {
+  it('Login -> inspect create new note, logout -> see if create new note is removed', () => {
     cy.visit('/');
 
     /* Login section */

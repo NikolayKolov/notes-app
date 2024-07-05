@@ -56,6 +56,13 @@ jobs:
         env:
           cypress_test_user: ${{ secrets.TEST_USER }}
           cypress_test_user_password: ${{ secrets.TEST_USER_PASSWORD }}
-          cypress_password: ${{secrets.USER_NAME}}
+          cypress_password: ${{ secrets.USER_NAME }}
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@latest
+        if: failure()
+        with:
+          name: cypress-snapshots
+          path: cypress/snapshots
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
