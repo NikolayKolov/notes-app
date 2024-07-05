@@ -42,7 +42,7 @@ jobs:
         run: npm run prisma:deploy
       - name: Start backend
         working-directory: ./server
-        run: npm run start
+        run: npm run start &
       - run: echo "Backend running"
 
       - name: Install frontend
@@ -55,7 +55,7 @@ jobs:
       - name: Install Cypress and run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://localhost:5173'
+          wait-on: 'http://127.0.0.1:5173'
           working-directory: ./client
           browser: chrome
           config: test_user=${{secrets.TEST_USER}},test_user_password=${{secrets.TEST_USER}},test_user_name=${{secrets.USER_NAME}}
