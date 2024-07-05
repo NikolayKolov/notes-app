@@ -63,6 +63,6 @@ jobs:
         if: failure()
         with:
           name: cypress-snapshots
-          path: ./client/cypress/snapshots
+          path: /home/runner/work/notes-app/notes-app/client/cypress/screenshots
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
