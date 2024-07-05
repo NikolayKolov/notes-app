@@ -45,19 +45,17 @@ jobs:
         run: npm run start &
       - run: echo "Backend running"
 
-      - name: Install frontend
-        working-directory: ./client
-        run: npm ci
-      - name: Start frontend
-        working-directory: ./client
-        run: npm run dev &
-
-      - name: Install Cypress and run E2E tests
+      - name: Install Cypress on FrontEnd and run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://127.0.0.1:5173'
           working-directory: ./client
+          build: npm ci
+          start: npm run dev
+          wait-on: 'http://127.0.0.1:5173'
           browser: chrome
-          config: test_user=${{ secrets.TEST_USER }},test_user_password=${{ secrets.TEST_USER_PASSWORD }},test_user_name=${{ secrets.USER_NAME }}
+        env:
+          cypress_test_user: ${{ secrets.TEST_USER }}
+          cypress_test_user_password: ${{ secrets.TEST_USER_PASSWORD }}
+          cypress_password: ${{secrets.USER_NAME}}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
