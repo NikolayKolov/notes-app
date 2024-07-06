@@ -81,7 +81,7 @@ jobs:
           NODE_ENV: production
         with:
           push: true
-          tags: notes-app/backend:latest
+          tags: nikolaykolov/notes-app-backend:latest
           context: ./server/
           file: ./server/Dockerfile
           
@@ -91,7 +91,7 @@ jobs:
           NODE_ENV: production
         with:
           push: true
-          tags: notes-app/frontend:latest
+          tags: nikolaykolov/notes-app-frontend:latest
           context: ./client/
           file: ./client/Dockerfile
 
