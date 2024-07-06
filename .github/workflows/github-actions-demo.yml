@@ -83,6 +83,7 @@ jobs:
           echo "Docker backend image pushed to repo"
           
       - name: Build and push Frontend Docker image
+        working-directory: ./client
         env:
           NODE_ENV: production
         run: |
