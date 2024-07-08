@@ -19,6 +19,9 @@ ARG NODE_VERSION=20.10.0
 # Nginx load balancer - https://nginx.org/en/docs/http/ngx_http_upstream_module.html#upstream
 ARG USE_PROXY=false
 
+# Pass an ARG that signals if the container should use AWS server configuration (default = false)
+ARG USE_AWS=false
+
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as build
@@ -62,21 +65,31 @@ RUN ["mkdir", "html"]
 
 WORKDIR /
 
-# Use the value of passed arg
+# Use the value of passed args
 ARG USE_PROXY
+ARG USE_AWS
 
-# If ARG USE_PROXY is set to default value of true, load appropriate conf
-FROM final as final-proxy-true
-RUN echo "this is the stage from USE_PROXY=true"
+# If ARG USE_PROXY and USE_AWS are set to value of true, load appropriate conf
+FROM final as final-proxy-true-true
+RUN echo "this is the stage from USE_PROXY=true USE_AWS=true"
 ENV NGINX_CONF=nginx.conf
 
-# If ARG USE_PROXY is set to default value of true, load appropriate conf
-FROM final as final-proxy-false
-RUN echo "this is the stage from from USE_PROXY=false"
+# If ARG USE_PROXY and USE_AWS are set to default value of false, load appropriate conf
+FROM final as final-proxy-false-false
+RUN echo "this is the stage from from USE_PROXY=false USE_AWS=false"
 ENV NGINX_CONF=nginx-noproxy.conf
 
+# If ARG USE_PROXY is false and USE_AWS is set to value of true, load appropriate conf
+FROM final as final-proxy-false-true
+RUN echo "this is the stage from from USE_PROXY=false USE_AWS=true"
+ENV NGINX_CONF=nginx-noproxy-aws.conf
 
-FROM final-proxy-${USE_PROXY}
+# If ARG USE_PROXY is true and USE_AWS is set to value of false, load appropriate conf
+FROM final as final-proxy-true-false
+RUN echo "this is the stage from from USE_PROXY=true USE_AWS=false"
+ENV NGINX_CONF=nginx.conf
+
+FROM final-proxy-${USE_PROXY}-${USE_AWS}
 
 # Copy appropriate *.conf server settings to docker image
 # Use file /etc/nginx/conf.d/default.conf rather than /etc/nginx/nginx.conf on image,
