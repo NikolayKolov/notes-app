@@ -17,10 +17,7 @@ ARG NODE_VERSION=20.10.0
 # AWS ECS with a more advanced application auto load balancer and will use this instead
 
 # Nginx load balancer - https://nginx.org/en/docs/http/ngx_http_upstream_module.html#upstream
-ARG USE_PROXY=false
-
-# Pass an ARG that signals if the container should use AWS server configuration (default = false)
-ARG USE_AWS=false
+ARG NGINX_CONF=nginx-noproxy.conf
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -66,30 +63,7 @@ RUN ["mkdir", "html"]
 WORKDIR /
 
 # Use the value of passed args
-ARG USE_PROXY
-ARG USE_AWS
-
-# If ARG USE_PROXY and USE_AWS are set to value of true, load appropriate conf
-FROM final as final-proxy-true-true
-RUN echo "this is the stage from USE_PROXY=true USE_AWS=true"
-ENV NGINX_CONF=nginx.conf
-
-# If ARG USE_PROXY and USE_AWS are set to default value of false, load appropriate conf
-FROM final as final-proxy-false-false
-RUN echo "this is the stage from from USE_PROXY=false USE_AWS=false"
-ENV NGINX_CONF=nginx-noproxy.conf
-
-# If ARG USE_PROXY is false and USE_AWS is set to value of true, load appropriate conf
-FROM final as final-proxy-false-true
-RUN echo "this is the stage from from USE_PROXY=false USE_AWS=true"
-ENV NGINX_CONF=nginx-noproxy-aws.conf
-
-# If ARG USE_PROXY is true and USE_AWS is set to value of false, load appropriate conf
-FROM final as final-proxy-true-false
-RUN echo "this is the stage from from USE_PROXY=true USE_AWS=false"
-ENV NGINX_CONF=nginx.conf
-
-FROM final-proxy-${USE_PROXY}-${USE_AWS}
+ARG NGINX_CONF
 
 # Copy appropriate *.conf server settings to docker image
 # Use file /etc/nginx/conf.d/default.conf rather than /etc/nginx/nginx.conf on image,

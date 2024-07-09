@@ -28,7 +28,7 @@ services:
       service: frontend
     build:
       args:
-        - USE_PROXY=true
+        - NGINX_CONF=nginx.conf
     ports: !override
       - "4173:4173"
     depends_on:
