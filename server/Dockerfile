@@ -44,6 +44,7 @@ FROM base as base-exposed-true
 RUN echo "Expose default port 5000"
 EXPOSE 5000
 
+# Don't expose the port here
 FROM base as base-exposed-false
 RUN echo "Don't expose default port 5000, will be done on cloud"
 
