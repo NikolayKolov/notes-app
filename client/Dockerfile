@@ -19,6 +19,9 @@ ARG NODE_VERSION=20.10.0
 # Nginx load balancer - https://nginx.org/en/docs/http/ngx_http_upstream_module.html#upstream
 ARG NGINX_CONF=nginx-noproxy.conf
 
+# What port the container should expose
+ARG PORT=4173
+
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as build
@@ -64,6 +67,7 @@ WORKDIR /
 
 # Use the value of passed args
 ARG NGINX_CONF
+ARG PORT
 
 # Copy appropriate *.conf server settings to docker image
 # Use file /etc/nginx/conf.d/default.conf rather than /etc/nginx/nginx.conf on image,
@@ -74,7 +78,7 @@ COPY --from=build /usr/src/notes-frontend/nginx/${NGINX_CONF} /etc/nginx/conf.d/
 COPY --from=build /usr/src/notes-frontend/dist/ /usr/share/nginx/html/
 
 # Expose the port that the application listens on.
-EXPOSE 4173
+EXPOSE ${PORT}
 
 # Run the application.
 # -g flag for directives, daemon off runs nginx in foreground as a main process
