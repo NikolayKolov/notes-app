@@ -49,6 +49,8 @@ RUN echo "Don't expose default port 5000, will be done on cloud"
 
 FROM base-exposed-${EXPOSE_PORT} as final
 
+ENV PORT=5000
+
 # Run the application
 # Use exec form
 CMD ["npm", "run", "start:docker"]
