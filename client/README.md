@@ -27,3 +27,6 @@ Set up the back end and fron end in the /server and /client folders accordingly.
   - In Command Prompt, type 'node -v' and execute. If an error appears, go to [this site](https://nodejs.org/) and install latest stable version from there.
 4. Open the frontend folder with Visual Studio code, and open a terminal and execute command 'npm install'.
 5. Open the NPM Scripts menu on the bottom left part and run the script 'dev', or type 'npm run vite'.
+
+
+## Project set-up with Docker
