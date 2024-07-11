@@ -78,7 +78,7 @@ jobs:
           NODE_ENV: production
         run: |
           echo "Start building Docker backend image"
-          docker build -t nikolaykolov/notes-app-backend:latest --build-arg="EXPOSE_PORT=false" .
+          docker build -t nikolaykolov/notes-app-backend:latest .
           docker push nikolaykolov/notes-app-backend:latest
           echo "Docker backend image pushed to repo"
           
