@@ -17,6 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 // get real IP address of user request
 app.set('trust proxy', true);
 
+app.use('/', (_req, res) => {
+    res.send("Hello ingress container! I'm root");
+})
+
 // load routes
 app.use('/api', routes);
 
