@@ -24,11 +24,8 @@ const Navigation = () => {
 
     const [status, setStatus] = useState('idle')
     const [responseText, setResponseText] = useState('')
-
-    const [status, setStatus] = useState('idle')
-    const [responseText, setResponseText] = useState('')
   
-    const handleFetch = async (fetchPath) => {
+    const handleFetch = async (fetchPath: string) => {
       setStatus('loading')
       try {
         const response = await fetch(fetchPath)
