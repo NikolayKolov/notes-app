@@ -12,7 +12,7 @@ ARG NODE_VERSION=20.10.0
 # Needed for cloud deployment, it is exposed there programmatically
 ARG EXPOSE_PORT=true
 
-FROM node:${NODE_VERSION}-alpine as base
+FROM node:${NODE_VERSION}-slim as base
 
 # Create app folder in /usr/src/notes-backend
 # Use exec form, not shell form, as exec form is executed directly 
