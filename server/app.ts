@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('trust proxy', true);
 
 // load routes
-app.use('/', routes);
+app.use('/api', routes);
 
 const errReqHandler: ErrorRequestHandler = async (err, _req, res, _next) => {
     if (err) {
