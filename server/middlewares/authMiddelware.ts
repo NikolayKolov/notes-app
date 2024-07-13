@@ -1,7 +1,7 @@
 import { TokenPayload } from "../config/types";
 import { decodeLoginToken } from "../utils/token";
 import { Request, Response, NextFunction } from "express";
-import { labels } from "config/labels";
+import { labels } from "../config/labels";
 
 const authUserRequest = (req: Request, res: Response, next: NextFunction) => {
     let token = req.header('Authorization');
