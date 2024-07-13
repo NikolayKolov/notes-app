@@ -24,7 +24,7 @@ WORKDIR /usr/src/notes-backend/
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
-    ["npm", "ci", "--omit=dev"]
+    ["npm", "ci"]
 
 # Give node user read/write access to prisma folder, so that prisma can run properly
 RUN ["chown", "-R", "node:node", "./node_modules/prisma"]
@@ -33,6 +33,8 @@ RUN ["chown", "-R", "node:node", "./node_modules/.prisma"]
 # Copy the rest of the source files into the image.
 COPY . .
 
+ENV PORT=5000
+
 # Run the application
 # Use exec form
-CMD ["npm", "run", "start:docker"]
+CMD ["npm", "start:docker"]
