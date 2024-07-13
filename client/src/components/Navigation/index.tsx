@@ -22,28 +22,6 @@ const Navigation = () => {
         setLoginDialog(false);
     }
 
-    const [status, setStatus] = useState('idle')
-    const [responseText, setResponseText] = useState('')
-  
-    const handleFetch = async (fetchPath: string) => {
-      setStatus('loading')
-      try {
-        const response = await fetch(fetchPath)
-        console.log('response:', response)
-      
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-  
-        const text = await response.text()
-        setResponseText(text)
-        setStatus('success')
-      } catch {
-        setStatus('error')
-        setResponseText('')
-      }
-    }
-
     return (
         <>
             <AppBar sx={{
@@ -65,14 +43,7 @@ const Navigation = () => {
                     }
                 }}>
                     <Box sx={{ textTransform: 'uppercase' }}>
-                        <NavigationLink text='notes-6' href='/' />
-                        <button onClick={() => handleFetch('/api')}>Fetch root API</button>
-                        <p>
-                            Status: {status}
-                        </p>
-                        <p className="read-the-docs">
-                            Result: {responseText}
-                        </p>
+                        <NavigationLink text='notes-7' href='/' />
                         <AuthComponent>
                             <NavigationLink text='new note' href='/create' cypressTestId="create-new-note" />
                         </AuthComponent>
