@@ -37,4 +37,4 @@ ENV PORT=5000
 
 # Run the application
 # Use exec form
-CMD ["npm", "start:docker"]
+CMD ["npm", "run", "start:docker"]
