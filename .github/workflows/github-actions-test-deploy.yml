@@ -78,8 +78,8 @@ jobs:
           NODE_ENV: production
         run: |
           echo "Start building Docker backend image"
-          docker build -t nikolaykolov/notes-app-backend:v126 .
-          docker push nikolaykolov/notes-app-backend:v126
+          docker build -t nikolaykolov/notes-app-backend:v127 .
+          docker push nikolaykolov/notes-app-backend:v127
           echo "Docker backend image pushed to repo"
           
       - name: Build and push Frontend Docker image
@@ -88,8 +88,8 @@ jobs:
           NODE_ENV: production
         run: |
           echo "Start building Docker frontend image"
-          docker build -t nikolaykolov/notes-app-frontend:v126 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" .
-          docker push nikolaykolov/notes-app-frontend:v126
+          docker build -t nikolaykolov/notes-app-frontend:v127 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" .
+          docker push nikolaykolov/notes-app-frontend:v127
           echo "Docker frontend image pushed to repo"
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

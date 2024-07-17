@@ -9,6 +9,8 @@ const app = express();
 
 // Port Number
 const PORT = Number(process.env.PORT) || 5000;
+// Host
+const HOST = process.env.HOST || 'localhost';
 
 // Parse JSON requests
 app.use(express.json());
@@ -32,8 +34,8 @@ const errReqHandler: ErrorRequestHandler = async (err, _req, res, _next) => {
 app.use(errReqHandler);
 
 // Server Setup
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server started on ${HOST}:${PORT}`);
 });
 
 // start scripts in package.json
