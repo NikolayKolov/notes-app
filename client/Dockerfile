@@ -22,9 +22,14 @@ ARG NGINX_CONF=nginx-noproxy.conf
 # What port the container should expose
 ARG PORT=4173
 
+# Backend URL
+ARG BACKEND_URL=""
+
 ################################################################################
 # Use node image for base image for all stages.
 FROM node:${NODE_VERSION}-alpine as build
+
+ARG BACKEND_URL
 
 # Create app folder in /usr/src/notes-frontend
 # Use exec form, not shell form, as exec form is executed directly 
@@ -34,7 +39,8 @@ RUN ["mkdir", "-p", "/usr/src/notes-frontend"]
 WORKDIR /usr/src/notes-frontend/
 
 # Use production node environment by default.
-#ENV NODE_ENV production
+ENV NODE_ENV production
+ENV VITE_BACKEND_URL=${BACKEND_URL}
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
