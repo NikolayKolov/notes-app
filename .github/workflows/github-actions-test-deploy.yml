@@ -89,7 +89,7 @@ jobs:
         # add more env vars when deploying to cloud
         env:
           NODE_ENV: production
-          VITE_BACKEND_URL:  ${{ vars.HOME_URL_GCP }}
+          VITE_BACKEND_URL:  ${{ vars.VITE_BACKEND_URL_GCP }}
         run: |
           echo "Start building Docker frontend image"
           docker build -t nikolaykolov/notes-app-frontend:v128 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" .
