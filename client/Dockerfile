@@ -38,9 +38,8 @@ RUN ["mkdir", "-p", "/usr/src/notes-frontend"]
 # Set working directory for all build stages.
 WORKDIR /usr/src/notes-frontend/
 
-# Use production node environment by default.
-ENV NODE_ENV production
-ENV VITE_BACKEND_URL=${BACKEND_URL}
+# Add backend url value
+ENV VITE_BACKEND_URL ${BACKEND_URL}
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
