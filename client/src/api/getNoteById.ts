@@ -4,18 +4,15 @@ const backendURL = import.meta.env.VITE_BACKEND_URL || "";
 
 const getNoteById = async (noteId: string, jwt: string): Promise<CreateNoteType> => {
     let errorInData = false;
-    const respHeaders: HeadersInit = {
-        "Authorization": `Bearer ${jwt}`,
-        "Content-Type": "application/json"
-    };
-
-    if (backendURL) respHeaders["Access-Control-Allow-Origin"] = backendURL;
 
     try {
         const response = await fetch(
             backendURL + '/api/note/get/'+noteId, {
                 method: 'POST',
-                headers: respHeaders,
+                headers: {
+                    "Authorization": `Bearer ${jwt}`,
+                    "Content-Type": "application/json"
+                },
             }
         );
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import type { ErrorRequestHandler } from "express";
 import { default as dotenv } from 'dotenv';
+import cors from 'cors';
 import routes from './routes';
 import prisma from './prisma/prismaClient.js';
 
@@ -18,6 +19,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // get real IP address of user request
 app.set('trust proxy', true);
+
+const HOME_URL = process.env.HOME_URL || '';
+
+if (HOME_URL) {
+    // Add CORS policy
+    app.use(cors({
+        origin: HOME_URL
+    }));
+}
+
 
 // load routes
 app.use('/api', routes);

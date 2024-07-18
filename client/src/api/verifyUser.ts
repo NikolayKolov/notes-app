@@ -1,15 +1,12 @@
 const backendURL = import.meta.env.VITE_BACKEND_URL || "";
 
 const verifyUser = async (UUID:string): Promise<Response> => {
-    const respHeaders: HeadersInit = {
-        "Content-Type": "application/json",
-    };
-    if (backendURL) respHeaders["Access-Control-Allow-Origin"] = backendURL;
-
     const response = await fetch(
         `${backendURL}/api/user/verify/${UUID ?? '' }`, {
             method: 'GET',
-            headers: respHeaders,
+            headers: {
+                "Content-Type": "application/json",
+            },
         }
     )
 
