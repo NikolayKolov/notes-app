@@ -1,8 +1,10 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const getNotesByUser = async (userId: string, jwt: string): Promise<Response> => {
     let errorInData = false;
     try {
         const response = await fetch(
-            '/api/note/list/'+userId, {
+            backendURL + '/api/note/list/'+userId, {
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${jwt}`

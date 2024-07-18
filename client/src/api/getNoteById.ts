@@ -1,10 +1,12 @@
 import { CreateNoteType } from "../validators/noteValidator";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const getNoteById = async (noteId: string, jwt: string): Promise<CreateNoteType> => {
     let errorInData = false;
     try {
         const response = await fetch(
-            '/api/note/get/'+noteId, {
+            backendURL + '/api/note/get/'+noteId, {
                 method: 'POST',
                 headers: {
                     "Authorization": `Bearer ${jwt}`

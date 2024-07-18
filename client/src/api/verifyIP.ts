@@ -1,6 +1,8 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const verifyIP = async (UUID: string): Promise<Response> => {
     const response = await fetch(
-        `/api/user/verifyIP/${UUID ?? '' }`, {
+        `${backendURL}/api/user/verifyIP/${UUID ?? '' }`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

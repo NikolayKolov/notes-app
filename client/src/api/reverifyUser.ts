@@ -1,7 +1,9 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const reverifyUser = async (email: string): Promise<Response> => {
     console.log('reverifyUser email', email);
     const response = await fetch(
-        '/api/user/reverify/', {
+        backendURL + '/api/user/reverify/', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

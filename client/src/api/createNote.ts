@@ -1,8 +1,10 @@
 import { CreateNoteType } from "../validators/noteValidator";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const createNote = async (user: CreateNoteType, jwt: string): Promise<Response> => {
     const response = await fetch(
-        '/api/note/create', {
+        backendURL + '/api/note/create', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

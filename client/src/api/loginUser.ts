@@ -1,3 +1,5 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const loginUser = async (email: string, password: string): Promise<Response> => {
     const formBody = {
         email,
@@ -5,7 +7,7 @@ const loginUser = async (email: string, password: string): Promise<Response> => 
     };
 
     const response = await fetch(
-        '/api/user/login', {
+        backendURL + '/api/user/login', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

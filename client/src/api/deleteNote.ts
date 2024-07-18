@@ -1,7 +1,9 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const deleteNoteById = async (noteId: string, jwt: string): Promise<Response> => {
 
     const response = await fetch(
-        '/api/note/delete/'+noteId, {
+        backendURL + '/api/note/delete/'+noteId, {
             method: 'POST',
             headers: {
                 "Authorization": `Bearer ${jwt}`

@@ -1,8 +1,10 @@
 import { UserCreateRequestType } from "../validators/userValidator";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const registerUser = async (props: UserCreateRequestType): Promise<Response> => {
     const response = await fetch(
-        '/api/user/register', {
+        backendURL + '/api/user/register', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

@@ -18,7 +18,9 @@ env:
   MAILER_USER: ${{ vars.MAILER_USER }}
   MAILER_PASSWORD: ${{ secrets.MAILER_PASSWORD }}
   MAIL_NOREPLY: ${{ vars.MAIL_NOREPLY }}
+  # for testing in this GitHub Action job
   HOME_URL: http://localhost:5173
+  VITE_BACKEND_URL:  ${{ vars.HOME_URL_GCP }}
 
 jobs:
   cypress-tests-run:
@@ -73,23 +75,25 @@ jobs:
 
       - name: Build and push Backend Docker image
         working-directory: ./server
+        # add more env vars when deploying to cloud
         env:
-          HOME_URL: http://localhost
+          HOME_URL: ${{ vars.HOME_URL_GCP }}
           NODE_ENV: production
         run: |
           echo "Start building Docker backend image"
-          docker build -t nikolaykolov/notes-app-backend:v127 .
-          docker push nikolaykolov/notes-app-backend:v127
+          docker build -t nikolaykolov/notes-app-backend:v128 .
+          docker push nikolaykolov/notes-app-backend:v128
           echo "Docker backend image pushed to repo"
           
       - name: Build and push Frontend Docker image
         working-directory: ./client
+        # add more env vars when deploying to cloud
         env:
           NODE_ENV: production
         run: |
           echo "Start building Docker frontend image"
-          docker build -t nikolaykolov/notes-app-frontend:v127 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" .
-          docker push nikolaykolov/notes-app-frontend:v127
+          docker build -t nikolaykolov/notes-app-frontend:v128 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" .
+          docker push nikolaykolov/notes-app-frontend:v128
           echo "Docker frontend image pushed to repo"
 
       - run: echo "🍏 This job's status is ${{ job.status }}."

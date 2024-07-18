@@ -1,6 +1,8 @@
+const backendURL = import.meta.env.VITE_BACKEND_URL || "";
+
 const editNoteItem = async (noteId: number, checklistId: string, isDone: boolean, jwt: string): Promise<Response> => {
     const response = await fetch(
-        `/api/note/editnoteitem/${noteId}&${checklistId}`, {
+        `${backendURL}/api/note/editnoteitem/${noteId}&${checklistId}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
