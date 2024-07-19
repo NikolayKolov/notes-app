@@ -119,10 +119,12 @@ jobs:
         run: |
           echo "Push Docker frontend image"
           docker image tag nikolaykolov/notes-app-frontend:v133 us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
+          docker push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
           echo "Pushed Docker frontend image successfully"
 
       - name: "Push backend to GCP Artifacts Registry"
         run: |
           echo "Push Docker backend image"
           docker image tag nikolaykolov/notes-app-frontend:v133 us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
+          dockr push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           echo "Pushed Docker backend image successfully"
