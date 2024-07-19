@@ -104,9 +104,13 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_JSON_KEY }}"
 
-      # Print data
+      # Print GCP data
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
 
       - name: "Use gcloud CLI"
         run: "gcloud info"
+
+      # Get docker images data
+      - name: "Lis docker images available"
+        run: "docker images"
