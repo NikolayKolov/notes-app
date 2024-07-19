@@ -111,6 +111,9 @@ jobs:
       - name: "Use gcloud CLI"
         run: "gcloud info"
 
+      - name: "Docker auth"
+        run: gcloud auth configure-docker us-west1-docker.pkg.dev --quiet
+
       # Get docker images data
       - name: "List docker images available"
         run: "docker images"
@@ -126,5 +129,5 @@ jobs:
         run: |
           echo "Push Docker backend image"
           docker image tag nikolaykolov/notes-app-frontend:v133 us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
-          dockr push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
+          docker push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           echo "Pushed Docker backend image successfully"
