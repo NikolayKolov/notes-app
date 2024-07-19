@@ -97,3 +97,16 @@ jobs:
           echo "Docker frontend image pushed to repo"
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      # Authenticate to Google Cloud Platform
+      - id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_JSON_KEY }}"
+
+      # Print data
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
