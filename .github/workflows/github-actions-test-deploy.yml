@@ -80,8 +80,8 @@ jobs:
           NODE_ENV: production
         run: |
           echo "Start building Docker backend image"
-          docker build -t nikolaykolov/notes-app-backend:v133 .
-          docker push nikolaykolov/notes-app-backend:v133
+          docker build -t nikolaykolov/notes-app-backend:latest .
+          docker push nikolaykolov/notes-app-backend:latest
           echo "Docker backend image pushed to repo"
           
       - name: Build and push Frontend Docker image
@@ -92,13 +92,13 @@ jobs:
         # Add docker image build URL here
         run: |
           echo "Start building Docker frontend image"
-          docker build -t nikolaykolov/notes-app-frontend:v133 --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" --build-arg="BACKEND_URL=${{ vars.VITE_BACKEND_URL_GCP }}" .
-          docker push nikolaykolov/notes-app-frontend:v133
+          docker build -t nikolaykolov/notes-app-frontend:latest --build-arg="NGINX_CONF=nginx-noproxy-cloud.conf" --build-arg="PORT=8080" --build-arg="BACKEND_URL=${{ vars.VITE_BACKEND_URL_GCP }}" .
+          docker push nikolaykolov/notes-app-frontend:latest
           echo "Docker frontend image pushed to repo"
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-      # Authenticate to Google Cloud Platform
+      # Authenticate to Google Cloud Platform with Artifacts Registry service account
       - id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
@@ -121,13 +121,13 @@ jobs:
       - name: "Push frontend to GCP Artifacts Registry"
         run: |
           echo "Push Docker frontend image"
-          docker image tag nikolaykolov/notes-app-frontend:v133 us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
+          docker image tag nikolaykolov/notes-app-frontend:latest us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
           docker push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
           echo "Pushed Docker frontend image successfully"
 
       - name: "Push backend to GCP Artifacts Registry"
         run: |
           echo "Push Docker backend image"
-          docker image tag nikolaykolov/notes-app-frontend:v133 us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
+          docker image tag nikolaykolov/notes-app-backend:latest us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           docker push us-west1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           echo "Pushed Docker backend image successfully"

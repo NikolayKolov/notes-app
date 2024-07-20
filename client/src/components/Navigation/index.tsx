@@ -43,7 +43,7 @@ const Navigation = () => {
                     }
                 }}>
                     <Box sx={{ textTransform: 'uppercase' }}>
-                        <NavigationLink text='notes-33' href='/' />
+                        <NavigationLink text='notes' href='/' />
                         <AuthComponent>
                             <NavigationLink text='new note' href='/create' cypressTestId="create-new-note" />
                         </AuthComponent>
