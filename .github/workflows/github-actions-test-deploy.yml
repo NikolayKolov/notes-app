@@ -147,6 +147,8 @@ jobs:
           service: ${{ vars.GCP_BE_SERVICE_NAME }}
           region: ${{ vars.GCP_REGION }}
           image: ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
+          env_vars: |
+            HOME_URL=${{ vars.HOME_URL_GCP }}
 
       - name: Deploy Frontend to Cloud Run
         id: deploy-fe
