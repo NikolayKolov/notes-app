@@ -144,7 +144,7 @@ jobs:
         id: deploy-be
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ vars.GCP_BE_SERVICE_NAME }}
+          service: ${{ vars.GCP_BE_SERVICE_ID }}
           region: ${{ vars.GCP_REGION }}
           image: ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           env_vars: |
@@ -154,6 +154,6 @@ jobs:
         id: deploy-fe
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ vars.GCP_FE_SERVICE_NAME }}
+          service: ${{ vars.GCP_FE_SERVICE_ID }}
           region: ${{ vars.GCP_REGION }}
           image: ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
