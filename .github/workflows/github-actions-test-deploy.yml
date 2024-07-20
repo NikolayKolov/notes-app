@@ -131,7 +131,7 @@ jobs:
           echo "Push Docker backend image"
           docker image tag nikolaykolov/notes-app-backend:latest \
           ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
-          docker push ${{ vars.GCP_REGION }}1-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
+          docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
           echo "Pushed Docker backend image successfully"
 
       # Authenticate to Google Cloud Platform with Google Cloud Run service account
