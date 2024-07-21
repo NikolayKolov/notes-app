@@ -150,7 +150,6 @@ jobs:
           env_vars: |-
             NODE_ENV=production
             HOME_URL=${{ vars.HOME_URL_GCP }}
-            PORT=${{ vars.BACKEND_PORT }}
             HOST=0.0.0.0
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             DATABASE_DIRECT_URL=${{ secrets.DATABASE_DIRECT_URL }}
