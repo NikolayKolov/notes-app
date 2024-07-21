@@ -145,15 +145,28 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ vars.GCP_BE_SERVICE_ID }}
-          region: ${{ vars.GCP_REGION }}
+          region: us-central1
           image: ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-backend:latest
-          env_vars: |
+          env_vars: |-
+            NODE_ENV=production
             HOME_URL=${{ vars.HOME_URL_GCP }}
+            PORT=${{ vars.BACKEND_PORT }}
+            HOST=0.0.0.0
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            DATABASE_DIRECT_URL=${{ secrets.DATABASE_DIRECT_URL }}
+            TOKEN_KEY=${{ vars.BACKEND_TOKEN_KEY }}
+            MAILER_USER=${{ vars.MAILER_USER }}
+            MAILER_PASSWORD=${{ secrets.MAILER_PASSWORD }}
+            MAIL_NOREPLY=${{ vars.MAIL_NOREPLY }}
+
 
       - name: Deploy Frontend to Cloud Run
         id: deploy-fe
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ vars.GCP_FE_SERVICE_ID }}
-          region: ${{ vars.GCP_REGION }}
+          region: us-central1
           image: ${{ vars.GCP_REGION }}-docker.pkg.dev/iron-foundry-428913-h2/notes-app-repo-01/notes-app-frontend:latest
+          env_vars: |-
+            NODE_ENV=production
+            VITE_BACKEND_URL=${{ vars.VITE_BACKEND_URL_GCP }}
