@@ -22,8 +22,9 @@ app.set('trust proxy', true);
 
 const HOME_URL = process.env.HOME_URL || '';
 
+// Set up CORS policy
 if (HOME_URL) {
-    // Add CORS policy
+    // Add CORS policy if HOME_URL is defined
     app.use(cors({
         origin: HOME_URL
     }));

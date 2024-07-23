@@ -8,6 +8,8 @@ The back end is written in TypeScript and uses NodeJS, Express, JWT token authen
 The database contains notes and users. Each user must be authenticated to access the access the API endpoints to create, edit and delete notes. 
 Each user has access to only the notes he has created and is an owner of. The user password is stored in the form of a hash with salt value to increase security.
 The notes can be of 2 types - text or checklist.
+The user login function performs an IP check - if the user hasn't logged in/registered from that IP defire, the app sends a confirmation email for the user to verify this IP.
+The app uses node-cache in memory server side cache to cache some info instead of fetching of from the database - for example the note owner, as this info doesn't change for a given note.
 
 Both the frontend and the backend run on the same server (localhost) and must be run on the same machine.
 The frontend uses a proxy setting in the vite.config.ts file to communicate with the backend on localhost.
@@ -34,3 +36,11 @@ Set up the back end and front end in the /server and /client folders accordingly
 4. Open the backend folder with Visual Studio code, and open a terminal and execute command 'npm install'.
 5. Run the command 'npx prisma migrate dev' to push changes from Prisma to the database from step 1.
 6. Open the NPM Scripts menu on the bottom left part and run the script 'dev', or type 'npm run dev'.
+
+## Project set-up with Docker
+1. Set up a Postgres database in either localhost or remote server.
+2. Set up the appropriate env variables in the env files - see .env.sample and especially .env.sample.docker, since it is used for docker environment variables in the compose.yaml files.
+3. Open main project folder.
+4. Run command "docker compose up -d".
+4.1. If using the app with a proxy server container, use the appropriate file - "docker compose --file compose-proxy.yaml up -d".
+5. Open "localhost" in your browser to view app.
