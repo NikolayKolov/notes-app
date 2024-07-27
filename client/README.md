@@ -3,7 +3,7 @@
 This repository contains the front end for a simple Notes application.
 Before using this repo, set up the backend first. The back end is found [here](https://github.com/NikolayKolov/devteams-notes-server).
 
-The front end is written in TypeScript and uses React 18, Material UI 5, React Router V6 for client side routing, [SWR](https://swr.vercel.app/) for data fetching and caching, [Zod](https://zod.dev/) for form data validation.
+The front end is written in TypeScript and uses React 18, Material UI 5, React Router V6 for client side routing, [SWR](https://swr.vercel.app/) for data fetching and caching, [Zod](https://zod.dev/) for form data validation, [DND-Kit](https://dndkit.com/) for drag and drop list items manipulation.
 
 The user must be logged in to access the interface to create, edit and delete notes. Each user has access to only the notes he has created.
 The notes can be of 2 types - text or checklist.
