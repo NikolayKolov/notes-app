@@ -13,7 +13,7 @@ export const labels = {
     errorUnverifiedUser: 'Your account in not yet verified, please click the verification link in your email',
     errorWrongEmailUUID: 'The system could not verify your link, please check if it is copied correctly',
     errorExpiredEmailUUID: 'Your email verification link has expired',
-    errorIP: 'Possible malicious login datected, please verify IP in email',
+    errorIP: 'Possible malicious login detected, please verify IP in email',
     errorPassword: 'Wrong password',
     errorDefault: 'Could not perform action right now, please try again later',
     errorNoteOwner: 'User has no rights to edit this note',
